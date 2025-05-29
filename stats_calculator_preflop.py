@@ -276,7 +276,10 @@ def calculate_preflop_stats_for_player(ps, cursor: sqlite3.Cursor, player_id: in
             ps.fold_bb_vs_sb_steal_actions = acts
 
     # --- Open Raise por Posição Categórica (EP, MP, CO, BTN, SB) ---
-    from .stats_calculator import POSITION_CATEGORIES, PF_POS_CATS_FOR_STATS # Importar aqui para evitar circular se movido
+    # Importa diretamente o modulo principal para obter as constantes necessarias.
+    # Usar import absoluto evita erros de "relative import" quando o arquivo e executado
+    # fora de um pacote Python propriamente definido.
+    from stats_calculator import POSITION_CATEGORIES, PF_POS_CATS_FOR_STATS
     for pos_cat_key in PF_POS_CATS_FOR_STATS:
         actual_positions_in_cat = [p for p, cat in POSITION_CATEGORIES.items() if cat == pos_cat_key]
         if not actual_positions_in_cat: continue
@@ -325,13 +328,18 @@ def calculate_preflop_stats_for_player(ps, cursor: sqlite3.Cursor, player_id: in
             setattr(ps, f"open_raise_{pos_cat_key.lower()}_actions", res_or_cat['acts'] or 0)
             
     # --- Call Open Raise por Posição Categórica ---
-    from .stats_calculator import PF_POS_CATS_FOR_CALL_STATS # Importar aqui para evitar circular se movido
+    # Utiliza import absoluto para evitar problemas de importacao relativa quando
+    # o projeto nao estiver configurado como pacote.
+    from stats_calculator import PF_POS_CATS_FOR_CALL_STATS
     for pos_cat_key in PF_POS_CATS_FOR_CALL_STATS:
         actual_positions_in_cat = [p for p, cat in POSITION_CATEGORIES.items() if cat == pos_cat_key]
         if not actual_positions_in_cat: continue
         placeholders = ','.join(['?'] * len(actual_positions_in_cat))
         
-        params_call_or = [player_id] + [player_id] + actual_positions_in_cat + [player_id, player_id]
+        # Ordem dos parametros deve corresponder aos marcadores "?" na query.
+        # Sao necessarios apenas tres valores de player_id: para o OR adversario,
+        # para a verificacao da acao do proprio jogador e para a acao de call.
+        params_call_or = [player_id, player_id] + actual_positions_in_cat + [player_id]
 
         query_call_or = f"""
             WITH OpenRaisesByOthers AS (

@@ -75,6 +75,19 @@ def create_tables(conn):
     # Índices (Exemplo, adicione mais conforme necessário)
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_actions_player_street_type ON actions (player_id, street, action_type);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_actions_hand_sequence ON actions (hand_db_id, action_sequence);")
+    # Índices adicionais para acelerar consultas complexas de Pré-Flop
+    cursor.execute(
+        "CREATE INDEX IF NOT EXISTS idx_actions_hand_player ON actions (hand_db_id, player_id);"
+    )
+    cursor.execute(
+        "CREATE INDEX IF NOT EXISTS idx_actions_hand_street_type ON actions (hand_db_id, street, action_type);"
+    )
+    cursor.execute(
+        "CREATE INDEX IF NOT EXISTS idx_hand_players_hand_player ON hand_players (hand_db_id, player_id);"
+    )
+    cursor.execute(
+        "CREATE INDEX IF NOT EXISTS idx_hand_players_hand_position ON hand_players (hand_db_id, position);"
+    )
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_hands_pfa ON hands (preflop_aggressor_id);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_hands_history_id ON hands (hand_history_id);") # Muito importante
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_players_name ON players (player_name);")

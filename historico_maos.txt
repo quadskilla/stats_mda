@@ -1,0 +1,27 @@
+PokerStars Hand #249737310447: Tournament #3733800178, $14.70+$1.80 USD Hold'em No Limit - Level XXIX (3500/7000) - 2024/04/01 4:38:35 ET
+Table '3733800178 3' 9-max Seat #5 is the button
+Seat 5: lucky_gummo (82442 in chips) 
+Seat 7: Nita-kun (887558 in chips) 
+lucky_gummo: posts the ante 875
+Nita-kun: posts the ante 875
+lucky_gummo: posts small blind 3500
+Nita-kun: posts big blind 7000
+*** HOLE CARDS ***
+lucky_gummo: calls 3500
+Nita-kun: raises 879683 to 886683 and is all-in
+lucky_gummo: calls 74567 and is all-in
+Uncalled bet (805116) returned to Nita-kun
+*** FLOP *** [4h As 5h]
+*** TURN *** [4h As 5h] [9d]
+*** RIVER *** [4h As 5h 9d] [4c]
+*** SHOW DOWN ***
+Nita-kun: shows [9c 7s] (two pair, Nines and Fours)
+lucky_gummo: shows [Ts 8s] (a pair of Fours)
+Nita-kun collected 164884 from pot
+lucky_gummo finished the tournament in 2nd place and received $401.15.
+Nita-kun wins the tournament and receives $537.99 - congratulations!
+*** SUMMARY ***
+Total pot 164884 | Rake 0 
+Board [4h As 5h 9d 4c]
+Seat 5: lucky_gummo (button) (small blind) showed [Ts 8s] and lost with a pair of Fours
+Seat 7: Nita-kun (big blind) showed [9c 7s] and won (164884) with two pair, Nines and Fours

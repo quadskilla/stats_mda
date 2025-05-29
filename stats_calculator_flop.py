@@ -179,7 +179,7 @@ def calculate_flop_stats_for_player(ps, cursor: sqlite3.Cursor, player_id: int):
             JOIN actions donk_action ON pfa_ip.hand_db_id = donk_action.hand_db_id
             JOIN actions pfa_react ON pfa_ip.hand_db_id = pfa_react.hand_db_id AND pfa_react.player_id = ?
             WHERE donk_action.street = 'Flop' AND donk_action.action_type = 'bets' AND donk_action.player_id != ?
-              AND NOT EXISTS (SELECT 1 FROM actions pfa_prev_act WHERE pfa_prev_act.hand_db_id = pfa_ip.hand_db_id AND pfa_prev_act.street = 'Flop' AND p_prev_act.player_id = ? AND p_prev_act.action_sequence < donk_action.action_sequence)
+              AND NOT EXISTS (SELECT 1 FROM actions pfa_prev_act WHERE pfa_prev_act.hand_db_id = pfa_ip.hand_db_id AND pfa_prev_act.street = 'Flop' AND pfa_prev_act.player_id = ? AND pfa_prev_act.action_sequence < donk_action.action_sequence)
               AND pfa_react.street = 'Flop' AND pfa_react.action_sequence > donk_action.action_sequence
               AND pfa_react.bet_faced_by_player_amount > 0 /* PFA (jogador) está enfrentando o donk bet */
         )
